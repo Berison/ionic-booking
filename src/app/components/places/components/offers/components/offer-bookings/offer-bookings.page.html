@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary-booking">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/places/offers" color="fourth-booking">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title color="fourth-booking" [textContent]="place.title"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-button
+    color="third-booking"
+    [routerLink]="['/', 'places', 'offers', 'edit', place._id]"
+    >Edit</ion-button
+  >
+</ion-content>

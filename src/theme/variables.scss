@@ -1,2 +1,33 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
+// #F2EFE7 - main
+// #9ACBD0 - second
+// #48A6A7 - third
+// #2973B2 - fourth
+
+:root {
+  --ion-color-primary-booking: #222831;
+  --ion-color-second-booking: #393e46;
+  --ion-color-third-booking: #00adb5;
+  --ion-color-fourth-booking: #eeeeee;
+}
+
+.ion-color-primary-booking {
+  --ion-color-base: var(--ion-color-primary-booking);
+}
+
+.ion-color-second-booking {
+  --ion-color-base: var(--ion-color-second-booking);
+}
+
+.ion-color-third-booking {
+  --ion-color-base: var(--ion-color-third-booking);
+}
+
+.ion-color-fourth-booking {
+  --ion-color-base: var(--ion-color-fourth-booking);
+}
+
+ion-card-title[color="primary-booking"],
+ion-card-subtitle[color="primary-booking"],
+ion-card-content[color="primary-booking"] {
+  color: var(--ion-color-primary-booking) !important;
+}

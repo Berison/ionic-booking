@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary-booking">
+    <ion-buttons slot="start">
+      <ion-menu-button color="fourth-booking"> </ion-menu-button>
+    </ion-buttons>
+    <ion-title color="fourth-booking">Discover</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  [fullscreen]="true"
+  padding
+  *ngIf="loadedPlacesFromService as places"
+>
+  <ion-segment
+    (ionChange)="onFilterUpdate($event)"
+    color="primary-booking"
+    value="all"
+  >
+    <ion-segment-button value="all">
+      <ion-label>All Places</ion-label></ion-segment-button
+    >
+    <ion-segment-button value="bookable"
+      ><ion-label>Bookable Places</ion-label></ion-segment-button
+    >
+  </ion-segment>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" sizeSm="8" offsetSm="2">
+        <ion-card color="fourth-booking">
+          <ion-img [src]="places[0].imageUrl"></ion-img>
+          <ion-card-header>
+            <ion-card-title
+              [textContent]="places[0].title"
+              color="primary-booking"
+            ></ion-card-title>
+            <ion-card-subtitle
+              [textContent]="(places[0].price | currency) + ' / Night'"
+              color="primary-booking"
+            ></ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content color="primary-booking">
+            <p [textContent]="places[0].description"></p>
+          </ion-card-content>
+          <div>
+            <ion-button
+              fill="clear"
+              color="third-booking"
+              [routerLink]="['/', 'places', 'discover', places[0]._id]"
+            >
+              More</ion-button
+            >
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" sizeSm="8" offsetSm="2">
+        <ion-list>
+          <ion-item
+            *ngFor="let place of places.slice(1)"
+            [routerLink]="['/', 'places', 'discover', place._id]"
+            detail
+          >
+            <ion-thumbnail slot="start">
+              <ion-img [src]="place.imageUrl"></ion-img>
+            </ion-thumbnail>
+            <ion-label>
+              <h2 [textContent]="place.title"></h2>
+              <p [textContent]="place.description"></p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
