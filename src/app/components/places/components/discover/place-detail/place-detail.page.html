@@ -9,5 +9,23 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-button color="third-booking" (click)="onBookPlace()">Book</ion-button>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col sizeSm="6" offsetSm="3">
+        <ion-img [src]="place.imageUrl"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding ion-text-center">
+      <ion-col sizeSm="6" offsetSm="3">
+        <p [textContent]="place.description"></p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding ion-text-center" *ngIf="isBookable">
+      <ion-col sizeSm="6" offsetSm="3">
+        <ion-button color="third-booking" (click)="onBookPlace()"
+          >Book</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

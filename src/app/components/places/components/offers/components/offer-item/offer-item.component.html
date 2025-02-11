@@ -8,13 +8,13 @@
       <ion-icon name="calendar" color="third-booking"></ion-icon>
       <ion-text
         color="primary-booking"
-        [textContent]="getDummyDate() | date"
+        [textContent]="place.availableFrom | date"
       ></ion-text>
       <span>to</span>
       <ion-icon name="calendar" color="third-booking"></ion-icon>
       <ion-text
         color="primary-booking"
-        [textContent]="getDummyDate() | date"
+        [textContent]="place.availableTo | date"
       ></ion-text>
     </div>
   </ion-label>

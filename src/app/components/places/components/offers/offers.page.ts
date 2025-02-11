@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PlacesService } from '../../services/places.service';
 import { Place } from '../../models/places.model';
 import { IonItemSliding, MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-offers',
@@ -10,8 +11,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./offers.page.scss'],
   standalone: false,
 })
-export class OffersPage implements OnInit {
+export class OffersPage implements OnInit, OnDestroy {
   loadedPlacesFromService: Place[] = [];
+  subscriptionPlaces!: Subscription;
+  isLoading = false;
+
   constructor(
     private placesService: PlacesService,
     private menuCtrl: MenuController,
@@ -23,11 +27,16 @@ export class OffersPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.loadPlacesFromService();
+    this.isLoading = true;
+    this.placesService.fetchPlaces().subscribe(() => {
+      this.isLoading = false;
+    });
   }
 
   loadPlacesFromService() {
-    this.loadedPlacesFromService = this.placesService.places;
+    this.subscriptionPlaces = this.placesService.places.subscribe(
+      (places) => (this.loadedPlacesFromService = places)
+    );
   }
 
   onEdit(id: string, slidingItem: IonItemSliding) {
@@ -38,4 +47,8 @@ export class OffersPage implements OnInit {
   // onOpenMenu() {
   //   this.menuCtrl.toggle();
   // }
+
+  ngOnDestroy() {
+    if (this.subscriptionPlaces) this.subscriptionPlaces.unsubscribe();
+  }
 }
